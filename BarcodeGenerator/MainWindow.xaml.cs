@@ -20,6 +20,11 @@ namespace BarcodeGenerator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(text_input.Text))
+            {
+                MessageBox.Show("Please enter text to generate a barcode/QR code.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             var barcode = new Barcode
             {
@@ -28,26 +33,20 @@ namespace BarcodeGenerator
 
             try
             {
-                var imagePath = GenerateBarcode_Sprite_Barcode_Package(barcode);
-                var expireDate = new DateTime(2022, 10, 01).Ticks;
-                if(DateTime.UtcNow.Ticks < expireDate)
-                    PreviewBarcode(imagePath);
-                else
-                {
-                    MessageBox.Show(
-                        "Product is expired. Please Contact with developer. Email: biswajitmailid@gmail.com");
-                }
+                var isQrCode = rbQRCode.IsChecked == true;
+                var imagePath = GenerateBarcode(barcode, isQrCode);
+                PreviewBarcode(imagePath);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         #region Private Methods
-        private static string StoreFilePath(Barcode barcode)
+        private static string StoreFilePath(Barcode barcode, bool isQrCode)
         {
             var folder = Directory.GetCurrentDirectory() + "/outputs";
             if (!Directory.Exists(folder))
@@ -55,24 +54,26 @@ namespace BarcodeGenerator
                 Directory.CreateDirectory(folder);
             }
 
-            var filePath = $"{folder}/{barcode.Text}.png";
+            var fileName = isQrCode ? $"{barcode.Text}_QRCode.png" : $"{barcode.Text}_Barcode.png";
+            var filePath = $"{folder}/{fileName}.png";
             return filePath;
         }
 
-        private string GenerateBarcode_Sprite_Barcode_Package(Barcode barcode)
+        private string GenerateBarcode(Barcode barcode, bool isQrCode)
         {
-            var bs = new BarcodeSettings
+            var barCodeSettings = new BarcodeSettings
             {
-                Type = BarCodeType.Code39,
-                Data = barcode.Text
+                Type = isQrCode ? BarCodeType.QRCode : BarCodeType.Code39,
+                Data = barcode.Text,
+                ShowText = !isQrCode
             };
 
-            var bg = new BarCodeGenerator(bs);
-            
-            var filePathWithFileName = StoreFilePath(barcode);
+            var barCodeGenerator = new BarCodeGenerator(barCodeSettings);
+
+            var filePathWithFileName = StoreFilePath(barcode, isQrCode);
             if (File.Exists(filePathWithFileName))
                 throw new Exception("A file with same name already exists!");
-            bg.GenerateImage().Save(filePathWithFileName);
+            barCodeGenerator.GenerateImage().Save(filePathWithFileName);
             return filePathWithFileName;
         }
 

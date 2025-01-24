@@ -7,17 +7,30 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#012840">
-        <Label Content="BARCODE GENERATOR" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="24" FontWeight="Bold" Foreground="#FFFBFBFB">
+        <Label Content="BARCODE GENERATOR" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" FontSize="24" FontWeight="Bold" Foreground="#FFFBFBFB">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <TextBox x:Name="text_input" HorizontalAlignment="Center" Margin="0,116,0,0" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="592" Foreground="#FF232323" FontFamily="Times New Roman" FontSize="14"/>
+        <TextBox x:Name="text_input" HorizontalAlignment="Center" Margin="15,80,0,0" TextAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="720" Foreground="#FF232323" FontFamily="Times New Roman" FontSize="14"/>
 
-        <Button Content="Generate" HorizontalAlignment="Center" Margin="0,158,0,0" VerticalAlignment="Top" Width="239" FontFamily="Times New Roman" FontSize="14" Foreground="#FF4C4C4C" FontWeight="Bold" Click="Button_Click"/>
-        <GroupBox Header="View Generated Barcode" Margin="104,183,104,10" FontSize="14" FontWeight="Bold" Foreground="White">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,125,0,244" Width="170" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="1.739"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.638"/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <RadioButton x:Name="rbBarcode" Content="Barcode" IsChecked="True" FontFamily="Times New Roman" FontSize="14" Foreground="White" Margin="10"/>
+            <RadioButton x:Name="rbQRCode" Content="QR Code" FontFamily="Times New Roman" FontSize="14" Foreground="White" Margin="10"/>
+        </StackPanel>
+
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="583,131,0,0" VerticalAlignment="Top" Width="177" FontFamily="Times New Roman" FontSize="14" Foreground="#FF4C4C4C" FontWeight="Bold" Click="Button_Click" Height="30"/>
+        <GroupBox Header="View Generated Barcode" Margin="48,199,40,10" FontSize="14" FontWeight="Bold" Foreground="White">
             <Image Name="imgDynamic" Margin="1,12,2,1" Stretch="None"  />
         </GroupBox>
-        <Label Content="Enter something to generate Barcode" HorizontalAlignment="Center" Margin="0,85,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label Content="Enter something to generate Barcode" HorizontalAlignment="Left" Margin="40,49,0,0" VerticalAlignment="Top" Foreground="White"/>
     </Grid>
 </Window>
