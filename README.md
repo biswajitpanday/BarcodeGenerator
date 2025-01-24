@@ -4,6 +4,14 @@ This is a desktop application built with WPF (.NET) that generates barcodes and 
 
 ---
 
+## Screenshot
+
+Below is a preview of the application displaying a generated barcode:
+
+![Application Screenshot](sample.png)
+
+---
+
 ## Features
 
 - **Barcode Generation:** Generate barcodes using Code39 format.
@@ -60,14 +68,6 @@ cd BarcodeGenerator
 |-- BarcodeGenerator.sln      # Solution file
 |-- README.md                 # Project documentation
 ```
-
-
-## Screenshot
-
-Below is a preview of the application displaying a generated barcode:
-
-![Application Screenshot](sample.png)
-
 
 ---
 
