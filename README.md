@@ -61,6 +61,14 @@ cd BarcodeGenerator
 |-- README.md                 # Project documentation
 ```
 
+
+## Screenshot
+
+Below is a preview of the application displaying a generated barcode:
+
+![Application Screenshot](sample.png)
+
+
 ---
 
 ## Error Handling
